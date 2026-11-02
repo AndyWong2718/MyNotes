@@ -150,8 +150,8 @@ $\begin{aligned}
     \end{minipage}%
     \hfill
     \begin{minipage}[t]{0.60\textwidth}
-        $\myPMF{x} = \dbinom{\myNumsSuccess}{x}\dbinom{\myNumsEntries - \myNumsSuccess}{n-x} \; / \; \dbinom{\myNumsEntries}{n} \\ 
-        {} \hfill \max(0, n-(\myNumsEntries-\myNumsSuccess)) \le x \le \min(\myNumsSuccess, n)$ \\
+        $\myPMF{x} = \left. \dbinom{\myNumsSuccess}{x}\dbinom{\myNumsEntries - \myNumsSuccess}{n-x} \; \middle/ \; \dbinom{\myNumsEntries}{n} \right. $ \\[1ex]
+        ${} \hfill \max(0, n-(\myNumsEntries-\myNumsSuccess)) \le x \le \min(\myNumsSuccess, n)$ \\
         $\myExpect{X} = n \cdot \dfrac{\myNumsSuccess}{\myNumsEntries}$ \\[2pt]
         $\myVariance{X} = n \cdot \dfrac{\myNumsSuccess}{\myNumsEntries} \cdot \left(1 - \dfrac{\myNumsSuccess}{\myNumsEntries}\right)\left(\dfrac{\myNumsEntries-n}{\myNumsEntries-1}\right)$ \\
         {\color{black!30}\hrule} \vspace{5pt}
