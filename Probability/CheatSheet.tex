@@ -1,0 +1,193 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\myP}[1]{P\left(#1\right)}
+\newcommand{\myPMF}[2][X]{\myP{#1 = #2}}
+\newcommand{\myExpect}[1]{\operatorname{E}\left[#1\right]}
+\newcommand{\myVariance}[1]{\operatorname{Var}\left[#1\right]}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{Discrete Probability Cheat Sheet}
+\author{}
+\date{}
+
+\begin{document}
+
+\textbf{Probability Identities}
+\hrule
+
+\begin{tabular}{rl}
+\textbf{Probability of union events:}
+    & $\begin{aligned}[t]
+        \myP{A \cup B \cup C} &= \myP{A} + \myP{B} + \myP{C} \\
+            &\quad - \myP{A \cap B} - \myP{A \cap C} - \myP{B \cap C} \\
+            &\quad + \myP{A \cap B \cap C} 
+    \end{aligned}$ \\ \addlinespace[1ex]
+\textbf{Total Probability Theorem:} 
+    & $\begin{aligned}[t] 
+        \myP{A} &= \textstyle\sum_{k=1}^n \myP{A \mid B_k} \myP{B_k}
+    \end{aligned}$ \\ \addlinespace[1ex]
+\textbf{Bayesian Theorem:} 
+    & $\begin{aligned}[t]
+        \myP{A_1 \mid B} &= \dfrac{ \myP{B \mid A_1} \myP{A_1} }{ \sum_{k=1}^{n} \myP{B \mid A_k} \myP{A_k} }
+    \end{aligned}$ \\
+\end{tabular}
+
+\vspace{5pt}
+\textbf{Independence}
+\hrule
+
+$\begin{aligned}
+    \myP{A} \cdot \myP{B} = \myP{A \cap B}
+\end{aligned}$
+
+\vspace{5pt}
+\textbf{Expected Value and Variance}
+\hrule
+
+$\begin{aligned}
+    \myExpect{X} &= \sum_{x} x \myPMF{x} \\
+    \myVariance{X} &= \myExpect{\,\left(X - \myExpect{X}\right)^2\,} = \sum_{x} \,\left(x - \myExpect{X}\right)^2\, \myPMF{x} \\
+        &= \myExpect{X^2} - \left(\,\myExpect{X}\,\right)^2 \\
+        &= \myExpect{\,X\left(X-1\right)\,} - \left(\,\myExpect{X}\,\right)^2 + \myExpect{X}
+\end{aligned}$
+
+\newpage
+\vspace{5pt}
+\textbf{Distributions} \vspace{2pt}
+\hrule
+
+
+% =============================================================
+% Binomial Distribution
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.38\textwidth}
+    \textbf{Binomial Distribution:} \\[2pt]
+    $X = \text{num of success}$
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+    $\myPMF{x} = \dbinom{n}{x} p^x (1-p)^{n-x} \hfill x \in \{0, 1, \dots, n\}$ \\[4pt]
+    $\myExpect{X} = np$ \\[2pt]
+    $\myVariance{X} = np(1-p)$
+\end{minipage}
+
+\vspace{5pt}
+{\color{black!30}\hrule}
+
+
+% =============================================================
+% Geometric Distribution
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.38\textwidth}
+    \textbf{Geometric Distribution:} \\[2pt]
+    trial repeated until the 1-st success \\
+    $X = \text{num of trials}$
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+    $\myPMF{x} = (1-p)^{x-1} p \hfill x \in \{1, 2, \dots\}$ \\[4pt]
+    $\myExpect{X} = \dfrac{1}{p}$ \\[4pt]
+    $\myVariance{X} = \dfrac{1-p}{p^2}$
+\end{minipage}
+
+\vspace{5pt}
+{\color{black!30}\hrule}
+
+
+% =============================================================
+% Negative Binomial Distribution
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.38\textwidth}
+    \textbf{Negative Binomial Distribution:} \\[2pt]
+    trial repeated until the $a$-th success \\
+    $X = \text{num of trials}$
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.59\textwidth}
+    $\myPMF{x} = \dbinom{x-1}{a-1} (1-p)^{x-a} p^a \hfill x \in \{a, a+1, \dots\}$ \\[4pt]
+    $\myExpect{X} = \dfrac{a}{p}$ \\[4pt]
+    $\myVariance{X} = \dfrac{a(1-p)}{p^2}$
+\end{minipage}
+
+\vspace{5pt}
+{\color{black!30}\hrule}
+
+
+% =============================================================
+% Hypergeometric Distribution
+% =============================================================
+\noindent
+{
+    \newcommand{\myNumsEntries}{N}
+    \newcommand{\myNumsSuccess}{N_S}
+    \newcommand{\myNumsFailure}{N_F}
+
+    \begin{minipage}[t]{0.37\textwidth}
+        \textbf{Hypergeometric Distribution:} \\[2pt]
+        $\myNumsEntries = \text{num of entries}$ \\
+        $\myNumsSuccess = \text{num of ``success'' in entries}$ \\
+        $n = {}$num of trials/draws \\
+        \phantom{$n = {}$}\textbf{draw without replacement} \\
+        $X = \text{num of ``success'' obtained}$
+        \vspace{3pt} \\
+        note: $(\myNumsEntries - \myNumsSuccess) = \myNumsFailure$
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.60\textwidth}
+        $\myPMF{x} = \dbinom{\myNumsSuccess}{x}\dbinom{\myNumsEntries - \myNumsSuccess}{n-x} \; / \; \dbinom{\myNumsEntries}{n} \\ 
+        {} \hfill \max(0, n-(\myNumsEntries-\myNumsSuccess)) \le x \le \min(\myNumsSuccess, n)$ \\
+        $\myExpect{X} = n \cdot \dfrac{\myNumsSuccess}{\myNumsEntries}$ \\[2pt]
+        $\myVariance{X} = n \cdot \dfrac{\myNumsSuccess}{\myNumsEntries} \cdot \left(1 - \dfrac{\myNumsSuccess}{\myNumsEntries}\right)\left(\dfrac{\myNumsEntries-n}{\myNumsEntries-1}\right)$ \\
+        {\color{black!30}\hrule} \vspace{5pt}
+        \textit{Approx.:} Hypergeometric $\approx$ Binomial when $\myNumsEntries \gg n$: \\
+        $\myPMF{x} \approx \dbinom{n}{x} p^x (1-p)^{n-x} \quad \text{where } p = \dfrac{\myNumsSuccess}{\myNumsEntries}$
+    \end{minipage}
+
+}
+
+\vspace{5pt}
+{\color{black!30}\hrule}
+
+
+% =============================================================
+% Poisson Distribution
+% =============================================================
+\noindent
+\begin{minipage}[t]{0.42\textwidth}
+    \textbf{Poisson Distribution:} \\[2pt]
+    $n = \text{num of } \Delta t$ \\
+    $X = \text{num of occurrences in } t = n \Delta t$ \\
+    $\mu = \myExpect{X} = np = \lambda t$ \\
+    $p = \myP{1 \text{ occurrence in each } \Delta t}$ \\
+    $\bullet$ $n \to \infty, \; p \to 0, \; \mu \text{ is finite}$ \\[2pt]
+    $\bullet$ $\myP{\ge 2 \text{ occurrences in each } \Delta t} = 0$ \\
+    $\bullet$ occurrences in each $\Delta t$ are independent
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.55\textwidth}
+    $\myPMF{x} = \dfrac{\mu^x}{x!} e^{-\mu} = \dfrac{ (\lambda t)^x }{ x! } e^{-\lambda t} \\ 
+    {} \hfill x \in \{0, 1, \dots, n\} \ (n \to \infty)$ \\[6pt]
+    $\myExpect{X} = \mu = \lambda t$ \\[4pt]
+    $\myVariance{X} = \mu = \lambda t$
+\end{minipage}
+
+\vspace{6pt}
+\hrule
+\vspace{6pt}
+
+
+\end{document}
