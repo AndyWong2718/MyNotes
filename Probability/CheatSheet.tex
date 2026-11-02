@@ -13,6 +13,7 @@
 \newcommand{\myPMF}[2][X]{\myP{#1 = #2}}
 \newcommand{\myExpect}[1]{\operatorname{E}\left[#1\right]}
 \newcommand{\myVariance}[1]{\operatorname{Var}\left[#1\right]}
+\newcommand{\myLittleO}[1]{\operatorname{o}\left(#1\right)}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
@@ -26,20 +27,21 @@
 \textbf{Probability Identities}
 \hrule
 
-\begin{tabular}{rl}
-\textbf{Probability of union events:}
+\begin{tabular}{ll}
+\textbf{Probability of 3 union events:}
     & $\begin{aligned}[t]
         \myP{A \cup B \cup C} &= \myP{A} + \myP{B} + \myP{C} \\
             &\quad - \myP{A \cap B} - \myP{A \cap C} - \myP{B \cap C} \\
             &\quad + \myP{A \cap B \cap C} 
     \end{aligned}$ \\ \addlinespace[1ex]
-\textbf{Total Probability Theorem:} 
+\textbf{For disjoint events }$B_1, B_2, \dots, B_n$\textbf{: } & \\ \addlinespace[1ex]
+\qquad \textbf{Total Probability Theorem:} 
     & $\begin{aligned}[t] 
         \myP{A} &= \textstyle\sum_{k=1}^n \myP{A \mid B_k} \myP{B_k}
     \end{aligned}$ \\ \addlinespace[1ex]
-\textbf{Bayesian Theorem:} 
+\qquad \textbf{Bayesian Theorem:} 
     & $\begin{aligned}[t]
-        \myP{A_1 \mid B} &= \dfrac{ \myP{B \mid A_1} \myP{A_1} }{ \sum_{k=1}^{n} \myP{B \mid A_k} \myP{A_k} }
+        \myP{B_j \mid A} &= \dfrac{ \myP{A \mid B_j} \myP{B_j} }{ \sum_{k=1}^{n} \myP{A \mid B_k} \myP{B_k} }
     \end{aligned}$ \\
 \end{tabular}
 
@@ -167,20 +169,20 @@ $\begin{aligned}
 % Poisson Distribution
 % =============================================================
 \noindent
-\begin{minipage}[t]{0.42\textwidth}
+\begin{minipage}[t]{0.52\textwidth}
     \textbf{Poisson Distribution:} \\[2pt]
     $n = \text{num of } \Delta t$ \\
     $X = \text{num of occurrences in } t = n \Delta t$ \\
     $\mu = \myExpect{X} = np = \lambda t$ \\
     $p = \myP{1 \text{ occurrence in each } \Delta t}$ \\
     $\bullet$ $n \to \infty, \; p \to 0, \; \mu \text{ is finite}$ \\[2pt]
-    $\bullet$ $\myP{\ge 2 \text{ occurrences in each } \Delta t} = 0$ \\
+    $\bullet$ $\myP{\ge 2 \text{ occurrences in each } \Delta t} \to\to 0$ ( $=\myLittleO{\Delta t}$ ) \\
     $\bullet$ occurrences in each $\Delta t$ are independent
 \end{minipage}%
 \hfill
-\begin{minipage}[t]{0.55\textwidth}
-    $\myPMF{x} = \dfrac{\mu^x}{x!} e^{-\mu} = \dfrac{ (\lambda t)^x }{ x! } e^{-\lambda t} \\ 
-    {} \hfill x \in \{0, 1, \dots, n\} \ (n \to \infty)$ \\[6pt]
+\begin{minipage}[t]{0.45\textwidth}
+    $\myPMF{x} = \dfrac{\mu^x}{x!} e^{-\mu} = \dfrac{ (\lambda t)^x }{ x! } e^{-\lambda t} \\
+    {} \hfill x \in \{0, 1, \dots\}$ \\
     $\myExpect{X} = \mu = \lambda t$ \\[4pt]
     $\myVariance{X} = \mu = \lambda t$
 \end{minipage}
